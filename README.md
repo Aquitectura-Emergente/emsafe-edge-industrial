@@ -135,7 +135,7 @@ Cliente gráfico para ver lo que publica el Edge y publicar la config sin pelear
 ### Dosímetro
 
 Un ESP32 con el firmware `emsafe_dosimetro` cargado. El firmware está en el repo
-`emsafe-edge-flask`, en `firmware/emsafe_dosimetro`, y solo usa librerías incluidas en el paquete
+[`emsafe-edge-flask`](https://github.com/Aquitectura-Emergente/emsafe-edge-flask/tree/main/firmware/emsafe_dosimetro), en `firmware/emsafe_dosimetro`, y solo usa librerías incluidas en el paquete
 esp32. Para cargarlo:
 
 1. Instala el driver USB de la placa. El prototipo usa un **CP2102**: driver *CP210x VCP* de
