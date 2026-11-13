@@ -1,0 +1,35 @@
+# CI del Edge industrial: compila los módulos y ejecuta los tests.
+# Los tests usan dobles, sin BLE ni broker reales. Si el test de contrato
+# falla, el payload dejó de coincidir con el "Contrato MQTT" del README.
+
+name: CI — Edge industrial
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Compilar y probar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      # Detecta errores de sintaxis en módulos que solo se importan bajo demanda.
+      - name: Compilar todos los módulos
+        run: python -m compileall -q main.py device_gateway shared tests
+
+      # -b oculta la salida del Edge salvo que un test falle.
+      - name: Tests
+        run: python -m unittest discover -s tests -b -v

@@ -1,0 +1,13 @@
+# Entorno local
+.venv/
+__pycache__/
+*.pyc
+
+# Base SQLite del outbox (se recrea; nunca se versiona)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Variables de entorno con credenciales
+.env
