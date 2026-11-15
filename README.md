@@ -337,8 +337,23 @@ que esperan publicación o PUBACK.
 ```
 
 Los tests usan dobles y SQLite en memoria, sin BLE ni broker. `tests/test_contract_payload.py`
-compara el JSON que genera el código con los ejemplos de [Contrato MQTT](#contrato-mqtt). El CI
-corre lo mismo en Python 3.11 en cada push y pull request.
+compara el JSON que genera el código con los ejemplos de [Contrato MQTT](#contrato-mqtt).
+
+### Escenarios de aceptación (behave)
+
+`features/` tiene los escenarios en Gherkin (español) y `features/steps/` sus pasos. Usan la
+ingesta, el outbox SQLite, la publicación y el adaptador MQTT reales; solo el broker es un doble
+(`features/environment.py`) que se puede desconectar y que responde el PUBACK.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+$env:PYTHONUTF8 = "1"   # tildes correctas en la consola de Windows
+.\.venv\Scripts\python.exe -m behave
+```
+
+Para guardar un reporte JUnit: `python -m behave --junit --junit-directory reports`.
+
+El CI corre los tests y los escenarios en Python 3.11 en cada push y pull request.
 
 ---
 
