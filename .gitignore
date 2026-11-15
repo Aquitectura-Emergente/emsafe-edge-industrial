@@ -11,3 +11,6 @@ __pycache__/
 
 # Variables de entorno con credenciales
 .env
+
+# Reportes de behave
+reports/
